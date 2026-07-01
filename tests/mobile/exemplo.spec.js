@@ -18,7 +18,7 @@ async function main () {
   "appium:nativeWebScreenshot": true,
   "appium:newCommandTimeout": 3600,
   "appium:connectHardwareKeyboard": true,
-  "webSocketUrl": true,
+  "wdio:enforceWebDriverClassic": true,
   "unhandledPromptBehavior": "ignore"
 }
   const driver = await remote({
