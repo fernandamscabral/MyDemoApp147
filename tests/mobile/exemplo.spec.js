@@ -3,7 +3,9 @@
 // Then paste this into a .js file and run with Node:
 // node <file>.js
  
-import {remote} from 'webdriverio';
+import { remote } from 'webdriverio';
+import { expect } from "expect-webdriverio";
+
 async function main () {
   const caps = {
   "platformName": "Android",
@@ -28,15 +30,12 @@ async function main () {
     path: "/",
     capabilities: caps
   });
-  const el1 = await driver.$("-android uiautomator:new UiSelector().text(\"Sauce Labs Backpack\")");
-  await el1.click();
-  await el1.click();
-  const el2 = await driver.$("-android uiautomator:new UiSelector().resourceId(\"com.saucelabs.mydemoapp.android:id/productIV\").instance(0)");
-  await el2.click();
-  const el3 = await driver.$("id:com.saucelabs.mydemoapp.android:id/productTV");
-  await el3.click();
-  const el4 = await driver.$("id:com.saucelabs.mydemoapp.android:id/priceTV");
-  await el4.click();
+
+  const img_produto = await driver.$("-android uiautomator:new UiSelector().resourceId(\"com.saucelabs.mydemoapp.android:id/productIV\").instance(0)");
+  await img_produto.click();
+  const lbl_nome_produto = await driver.$("id:com.saucelabs.mydemoapp.android:id/productTV");
+  await expect( await lbl_nome_produto.getText()).toEqual("Sauce Labs Backpack"); // transformamos o clique em uma validação
+ 
   await driver.action('pointer')
     .move({ duration: 0, x: 601, y: 1948 })
     .down({ button: 0 })
@@ -44,6 +43,9 @@ async function main () {
     .up({ button: 0 })
     .perform();
   await driver.deleteSession();
+
+  const lbl_preco_produto = await driver.$("id:com.saucelabs.mydemoapp.android:id/priceTV");
+  await expect(await lbl_preco_produto.getText()).toEqual("$ 29.99"); // transformamos o clique em uma validação
 }
  
 main().catch(console.log);
