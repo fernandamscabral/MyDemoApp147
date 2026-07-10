@@ -7,6 +7,6 @@ Funcionalidade: Comprar Produto
         E o "<preco_produto>"
 
     Exemplos:
-    | posicao | nome_produto              | preco_produto |
-    | 0       | Sauce Labs Backpack       | $29.99        |
-    | 3       | Sauce Labs Backpack (red) | $29.99        |
+    | posicao | nome_produto              | preco_produto  |
+    | 0       | Sauce Labs Backpack       | $ 29.99        |
+    | 3       | Sauce Labs Backpack (red) | $ 29.99        |

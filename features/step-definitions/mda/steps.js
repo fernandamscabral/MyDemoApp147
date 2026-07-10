@@ -1,17 +1,25 @@
-import { Given } from "@wdio/cucumber-framework";
-
+import { Given, Then, When, Before, After } from "@wdio/cucumber-framework";
+ 
+Before(async () => {
+  await driver.activateApp("com.saucelabs.mydemoapp.android");
+});
+ 
+After(async () => {
+  await driver.terminateApp("com.saucelabs.mydemoapp.android");
+});
+ 
 Given("que abro o MyDemoApp", async () => {
     const img_produto = await driver.$(
         '-android uiautomator:new UiSelector().resourceId("com.saucelabs.mydemoapp.android:id/productIV").instance(0)',
     );
-    await expect(await img_produto).toBeVisible();
+    await expect(await img_produto).toBeDisplayed();
 });
 
 When("seleciono o produto na {string}", async (posicao) => {
     const img_produto = await driver.$(
         `-android uiautomator:new UiSelector().resourceId("com.saucelabs.mydemoapp.android:id/productIV").instance(${posicao})`,
     );
-    await expect(await img_produto).click();
+    await img_produto.click();
 });
 
 Then("exibe a pagina de detalhe com o {string}", async (nome_produto) => {
@@ -31,5 +39,4 @@ Then("o {string}", async (preco_produto) => {
         "id:com.saucelabs.mydemoapp.android:id/priceTV",
     );
     await expect(await lbl_preco_produto.getText()).toEqual(preco_produto); // transformar em uma validação
-    await driver.deleteSession();
 });
