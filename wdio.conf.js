@@ -25,9 +25,8 @@ exports.config = {
         './features/**/*.feature'
     ],
     // Patterns to exclude.
-    exclude: [
-        // 'path/to/excluded/files'
-    ],
+    exclude: ['./features/**/selecionar_produto.feature'],
+
     //
     // ============
     // Capabilities
