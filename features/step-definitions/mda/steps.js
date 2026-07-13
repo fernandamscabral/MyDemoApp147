@@ -1,13 +1,5 @@
-import { Given, Then, When, Before, After } from "@wdio/cucumber-framework";
- 
-Before(async () => {
-  await driver.activateApp("com.saucelabs.mydemoapp.android");
-});
- 
-After(async () => {
-  await driver.terminateApp("com.saucelabs.mydemoapp.android");
-});
- 
+import { Given, Then, When } from "@wdio/cucumber-framework";
+  
 Given("que abro o MyDemoApp", async () => {
     const img_produto = await driver.$(
         '-android uiautomator:new UiSelector().resourceId("com.saucelabs.mydemoapp.android:id/productIV").instance(0)',
